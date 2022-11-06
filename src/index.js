@@ -1,12 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const routes = require('./routes');
 
-//
-
 const app = express();
-app.use(routes);
+app.use(express.json());
+
 app.use(bodyParser.json());
+
+app.use(routes);
 
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
