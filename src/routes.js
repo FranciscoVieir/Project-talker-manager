@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { validationLogin } = require('./Middlewares/validationLogin');
 const { getAllTalkers, getById } = require('./GetFoms/getAllForms');
 
 const router = Router();
@@ -20,5 +21,7 @@ router.get('/talker/:id', async (request, response) => {
   }
   response.status(200).json(talkers);
 });
+
+router.post('/login', validationLogin);
 
 module.exports = router;
