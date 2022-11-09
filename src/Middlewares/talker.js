@@ -66,7 +66,7 @@ const validationWatchedAt = (request, response, next) => {
 const validationRate = (request, response, next) => {
   const { talk } = request.body;
   const { rate } = talk;
-  if (!rate) {
+  if (typeof rate === 'undefined') {
     return response.status(400).json({ message: 'O campo "rate" é obrigatório' });
   }
 

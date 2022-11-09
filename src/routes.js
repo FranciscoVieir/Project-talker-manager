@@ -1,10 +1,16 @@
 const { Router } = require('express');
 const { validationLogin } = require('./Middlewares/validationLogin');
-const { vadalitonAuthorization, validationName,
+const {
+  vadalitonAuthorization,
+  validationName,
   validationAge,
   validationTalk,
   validationWatchedAt,
-  validationRate } = require('./Middlewares/talker');
+  validationRate,
+} = require('./Middlewares/talker');
+
+const { deleteTalker } = require('./Middlewares/deleteTalker');
+  const { putTalker } = require('./Middlewares/putTalker');
 const { getAllTalkers, getById, addTalker } = require('./GetFoms/getAllForms');
 
 const router = Router();
@@ -29,11 +35,22 @@ router.get('/talker/:id', async (request, response) => {
 
 router.post('/login', validationLogin);
 
-router.post('/talker', vadalitonAuthorization,
+router.post('/talker',
+  vadalitonAuthorization,
   validationName,
   validationAge,
   validationTalk,
   validationWatchedAt,
   validationRate, addTalker);
+
+router.put('/talker/:id',
+  vadalitonAuthorization,
+  validationName,
+  validationAge,
+  validationTalk,
+  validationWatchedAt,
+  validationRate, putTalker);
+
+  router.delete('/talker/:id', vadalitonAuthorization, deleteTalker);
 
 module.exports = router;
